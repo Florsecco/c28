@@ -18,6 +18,7 @@
 				<h2 class="products-title">Basado en tu última visita</h2>
 			</div>
 			<!-- Show the "visited" products -->
+			
 			<div class="col-12 col-sm-6 col-lg-3">
 				<% for (const product of visitado) { %>
 				<section class="product-box">
@@ -28,8 +29,7 @@
 						<article class="product-box_data">
 							<% if (product.discount !== 0) { %>
 							<h2>FINAL PRICE</h2>
-							<!-- aqui un codigo -->
-								<span>DISCOUNT <%=product.discount%> % OFF</span>
+							<span>DISCOUNT <%=product.discount%> % OFF</span>
 							<% } %>
 							<p><%=product.name%></p>
 							<i class="fas fa-truck"></i>

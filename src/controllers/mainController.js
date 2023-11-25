@@ -14,7 +14,7 @@ const controller = {
 		const oferta = products.filter((producto)=>producto.category=='in-sale')
 		const visitado = products.filter((producto)=>producto.category=='visited')
 		res.render('index',{oferta: oferta,visitado: visitado})
-	},
+		},
 	search: (req, res) => {
 		// Do the magic
 	},
