@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <!-- Include Head -->
-<%- include('partials/head', {title: '¿?'}) %>
+<%- include('partials/head', {title: 'Detalle de Producto'}) %>
 <body>
 	<!-- Header -->
 	<%- include('partials/headerNavbar') %>
@@ -25,12 +25,15 @@
 				<div class="col-12 col-lg-4">
 					<article class="product-detail-info">
 						<h2 class="product-detail-title"><%= product.name %></h2>
-						
-							<p class="product-detail-price small">
-								<span>$<%= product.price %></span>
-								/
-								<b><%= product.discount %>% OFF</b>
-							</p>
+							<% if (product.discount !==0) { %>
+								<p class="product-detail-price small">
+									<span>$<%= product.price %></span>
+									/
+	
+									<b><%= product.discount %>% OFF</b>
+								</p>
+
+							<% } %>
 							<p class="product-detail-price">
 								$<%=toThousand(product.price-(product.price*product.discount/100)) %>
 							</p>
@@ -49,7 +52,7 @@
 						<a href="#" class="buy-now-button">COMPRAR AHORA</a>
 						<hr>
 
-						<form action="/products/edit/<%= product.id %>?_method=PUT" method="POST"><button class="action-button edit" type="submit">EDITAR PRODUCTO</button></form>
+						<a href="/products/edit/<%= product.id %>" style="display: inline-flex" class="action-button edit" >EDITAR PRODUCTO</a>
 						<form action="/products/delete/<%= product.id %>?_method=DELETE" method="POST" style="display: inline-flex">
 							<button type="submit" class="action-button delete">ELIMINAR</button>
 						</form>

@@ -37,24 +37,27 @@ const controller = {
 	
 	// Create -  Method to store
 	store: (req, res) => {
-		res.send('soy el store de productos')
+		console.log('estamos en el store');
+		res.send({message: 'oks estamos en el store'})
 	},
 
 	// Update - Form to edit
 	edit: (req, res) => {
-		console.log('query', req.query._method);
-		res.send({message: 'oks'})
+		const idEncontrado= req.params.id
+		const productoEncontrado = findOne(idEncontrado)
+		res.render('product-edit-form', {product: productoEncontrado})
 	},
 	// Update - Method to update
 	update: (req, res) => {
 		// Do the magic
+		res.send({message:'oks estamos en update'})
 	},
 
 	// Delete - Delete one product from DB
 	destroy : (req, res) => {
 		// Do the magic
 		console.log('query', req.query._method);
-		res.send({message: 'oks'})
+		res.send({message: 'oks estamos en delete'})
 	}
 };
 

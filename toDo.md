@@ -8,6 +8,6 @@ acción: BORRAR y MODIFICAR. --DONE
 4. '/products/create' --> Mostrará el formulario de creación para un producto. --DONE
 5. '/products/' --> Deberá recibir los datos del formulario de creación. --DONE
 6. '/products/edit/:id' -->  Botón MODIFICAR: modificará al producto correspondiente en la base de
-datos JSON.
-7. '/products/' --> Deberá recibir los datos del formulario de edición.
-8. '/products/:id' --> Botón BORRAR: eliminará al producto de la base de datos JSON.
+datos JSON. --DONE
+7. '/products/' --> Deberá recibir los datos del formulario de edición. --DONE
+8. '/products/:id' --> Botón BORRAR: eliminará al producto de la base de datos JSON. --DONE
