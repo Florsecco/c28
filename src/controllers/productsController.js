@@ -3,7 +3,7 @@ const path = require('path');
 
 // const productsFilePath = path.join(__dirname, '../data/productsDataBase.json');
 // const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
-const { index, findOne } = require('../modules/productModel')
+const { index, findOne , createProduct} = require('../modules/productModel')
 //const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 const toThousand = n =>{
@@ -37,15 +37,20 @@ const controller = {
 	
 	// Create -  Method to store
 	store: (req, res) => {
-		console.log('estamos en el store');
-		res.send({message: 'oks estamos en el store'})
+		console.log('entro por controller, req.body', req.body);
+		console.log('entro por controller, req.file', req.file);
+		const product = req.body
+		product.image = req.file.filename
+		createProduct(product)
+		res.redirect('/products')
+
 	},
 
 	// Update - Form to edit
 	edit: (req, res) => {
 		const idEncontrado= req.params.id
 		const productoEncontrado = findOne(idEncontrado)
-		res.render('product-edit-form', {product: productoEncontrado})
+		res.render('product-edit-form', {productToEdit: productoEncontrado})
 	},
 	// Update - Method to update
 	update: (req, res) => {

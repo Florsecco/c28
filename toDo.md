@@ -11,3 +11,7 @@ acción: BORRAR y MODIFICAR. --DONE
 datos JSON. --DONE
 7. '/products/' --> Deberá recibir los datos del formulario de edición. --DONE
 8. '/products/:id' --> Botón BORRAR: eliminará al producto de la base de datos JSON. --DONE
+9. Instalar multer --> DONE
+10. Configurar multer --> DONE
+11. Crear metodo en el modelo para guardar un producto nuevo en la "DB" (JSON) -- DONE
+12. Redirigir a pantalla de productos con el producto creado includido.  --DONE
