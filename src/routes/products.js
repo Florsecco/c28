@@ -42,7 +42,7 @@ router.get('/detail/:id', productsController.detail);
 
 /*** EDIT ONE PRODUCT ***/ 
 router.get('/edit/:id', productsController.edit); 
-router.put('/edit/:id', productsController.update); 
+router.put('/edit/:id', uploadFile.single('image') , productsController.update); 
 
 
  /*** DELETE ONE PRODUCT***/ 

@@ -3,7 +3,7 @@ const path = require('path');
 
 // const productsFilePath = path.join(__dirname, '../data/productsDataBase.json');
 // const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
-const { index, findOne , createProduct} = require('../modules/productModel')
+const { index, findOne , createProduct, updateProduct} = require('../modules/productModel')
 //const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 const toThousand = n =>{
@@ -55,7 +55,22 @@ const controller = {
 	// Update - Method to update
 	update: (req, res) => {
 		// Do the magic
-		res.send({message:'oks estamos en update'})
+		const {name, price, discount, category,description} = req.body
+		const idProduct = req.params.id
+		const product = findOne(idProduct)
+		product.name = name
+		product.price = price
+		product.discount = discount
+		product.category = category 
+		product.description = description
+	
+		if(req.file !=undefined){
+			const imgAnterior = product.image
+			product.image = req.file.filename
+			fs.unlinkSync(path.join(__dirname, '../../public/images/products',imgAnterior))
+		}
+		updateProduct(product)
+		res.redirect(`/products/detail/${idProduct}`)
 	},
 
 	// Delete - Delete one product from DB

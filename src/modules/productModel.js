@@ -20,6 +20,17 @@ const model = {
         allProducts.push(product)
         // 4. volver a guardar los productos en el JSON
         writeFileSync(model.products, JSON.stringify(allProducts))
+    },
+    updateProduct: (product)=>{
+        const allProducts = model.index()
+        const indexProduct= allProducts.findIndex(producto=>producto.id==product.id)
+
+        if(indexProduct!==-1){
+            allProducts[indexProduct]=product
+        }else{
+            allProducts.push(product)
+        }
+        writeFileSync(model.products, JSON.stringify(allProducts))
     }
 }
 
