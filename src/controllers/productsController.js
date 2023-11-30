@@ -3,7 +3,7 @@ const path = require('path');
 
 // const productsFilePath = path.join(__dirname, '../data/productsDataBase.json');
 // const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
-const { index, findOne , createProduct, updateProduct} = require('../modules/productModel')
+const { index, findOne , deleteImage , createProduct, updateProduct, deleteProduct} = require('../modules/productModel')
 //const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 const toThousand = n =>{
@@ -67,7 +67,7 @@ const controller = {
 		if(req.file !=undefined){
 			const imgAnterior = product.image
 			product.image = req.file.filename
-			fs.unlinkSync(path.join(__dirname, '../../public/images/products',imgAnterior))
+			deleteImage(imgAnterior)
 		}
 		updateProduct(product)
 		res.redirect(`/products/detail/${idProduct}`)
@@ -76,8 +76,12 @@ const controller = {
 	// Delete - Delete one product from DB
 	destroy : (req, res) => {
 		// Do the magic
-		console.log('query', req.query._method);
-		res.send({message: 'oks estamos en delete'})
+		const idProduct = req.params.id
+		const product = findOne(idProduct)
+		const img = product.image
+		deleteImage(img)
+		deleteProduct(product)
+		res.redirect('/products')
 	}
 };
 

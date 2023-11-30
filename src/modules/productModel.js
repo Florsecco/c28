@@ -1,4 +1,4 @@
-const { readFileSync, writeFileSync } = require ('fs')
+const { readFileSync, writeFileSync , unlinkSync } = require ('fs')
 
 const { join } = require('path')
 const { all } = require('../app')
@@ -11,6 +11,12 @@ const model = {
         const ultimoElemento = (model.index()).pop()
         return ultimoElemento.id +1
     },
+    writeProduct:(array)=>{
+        return writeFileSync(model.products, JSON.stringify(array))
+    },
+    deleteImage: (img)=>{
+         return unlinkSync(join(__dirname, '../../public/images/products',img))
+    },
     createProduct: (product) => {
        // 1. Traer todos los prods
        const allProducts = model.index()
@@ -19,7 +25,7 @@ const model = {
         // 3. pushear el producto nuevo en la lista de productos
         allProducts.push(product)
         // 4. volver a guardar los productos en el JSON
-        writeFileSync(model.products, JSON.stringify(allProducts))
+        model.writeProduct(allProducts)
     },
     updateProduct: (product)=>{
         const allProducts = model.index()
@@ -30,7 +36,13 @@ const model = {
         }else{
             allProducts.push(product)
         }
-        writeFileSync(model.products, JSON.stringify(allProducts))
+        model.writeProduct(allProducts)
+    },
+    deleteProduct: (product)=>{
+        const allProducts = model.index()
+        const newProducts = allProducts.filter(producto=> producto.id!=product.id)
+        model.writeProduct(newProducts)
+
     }
 }
 
