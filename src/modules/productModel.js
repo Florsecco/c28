@@ -12,7 +12,7 @@ const model = {
         return ultimoElemento.id +1
     },
     writeProduct:(array)=>{
-        return writeFileSync(model.products, JSON.stringify(array))
+        return writeFileSync(model.products, JSON.stringify(array, null , 2 ))
     },
     deleteImage: (img)=>{
          return unlinkSync(join(__dirname, '../../public/images/products',img))
